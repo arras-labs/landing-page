@@ -6,51 +6,11 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "../components/ui/card";
-import { Input } from "../components/ui/input";
-import { Button } from "../components/ui/button";
+} from "./ui/card";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
 import { useMetaMask } from "../hooks/meta.hook";
-
-declare global {
-  interface Window {
-    ethereum?: any;
-  }
-}
-
-// Modello dati minimale per i pool
-export type Pool = {
-  id: string;
-  title: string;
-  description?: string;
-  targetEUR: number;
-  raisedEUR: number;
-  backers: number;
-  network: string;
-  poolAddress: `0x${string}`;
-  yieldEstimate?: number;
-  deadline?: string;
-};
-
-const FUNDING = {
-  targetEUR: 250_000,
-  raisedEUR: 167_400,
-  backers: 842,
-};
-
-const POOLS: Record<string, Pool> = {
-  "001": {
-    id: "001",
-    title: "Pool Immobile #001",
-    description: "Trilocale semicentrale, stima rendimento 6.1% annuo",
-    targetEUR: FUNDING.targetEUR,
-    raisedEUR: FUNDING.raisedEUR,
-    backers: FUNDING.backers,
-    network: "EVM Testnet",
-    poolAddress: "0x1111111111111111111111111111111111111111",
-    yieldEstimate: 6.1,
-    deadline: "2026-01-31",
-  },
-};
+import type { Pool } from "../types/types";
 
 // --- Form di contributo con invio ETH al contratto pool ---
 export function ContributionForm({ pool }: { pool: Pool }) {
