@@ -37,6 +37,9 @@ import {
 import { Progress } from "../components/ui/progress";
 import { Separator } from "../components/ui/separator";
 import { Link } from "react-router-dom";
+import { ImageCarousel } from "../components/ImageCarousel";
+import React from "react";
+import RoadmapSection from "../components/Roadmap.component";
 
 // -------------------------------------------------------------
 // Configurazione rapida (modifica questi valori per personalizzare)
@@ -151,6 +154,16 @@ const fadeUp = {
   transition: { duration: 0.6 },
 };
 
+const HOUSE_IMAGES = [
+  "/house-images/house1.png",
+  "/house-images/house2.png",
+  "/house-images/house3.png",
+  "/house-images/house4.png",
+  "/house-images/house5.png",
+  "/house-images/house6.png",
+  "/house-images/house7.png",
+];
+
 export default function App() {
   const progress = Math.min(
     100,
@@ -160,39 +173,61 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-slate-50 text-slate-900">
       {/* NAVBAR */}
-      <header className="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-slate-200">
-        <div className="mx-auto max-w-full px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-xl bg-slate-900 text-white grid place-items-center">
-              <House className="h-5 w-5" />
+      <header className="sticky top-0 z-40 backdrop-blur-md bg-white/80 border-b border-slate-200/80 shadow-sm">
+        <div className="mx-auto max-w-full px-4 sm:px-6 lg:px-8 py-4">
+          <div className="grid grid-cols-12 items-center gap-4">
+            {/* Logo Section - Left (2 columns) */}
+            <div className="col-span-2 flex items-center gap-3">
+              <div className="relative group">
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-amber-500 to-pink-500 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-200"></div>
+                <div className="relative h-10 w-10 rounded-xl bg-black text-white grid place-items-center shadow-lg">
+                  <House className="h-5 w-5" />
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-lg tracking-tight">
+                  {BRAND.name}
+                </span>
+                <Badge variant="secondary">alpha</Badge>
+              </div>
             </div>
-            <span className="font-semibold">{BRAND.name}</span>
-            <Badge variant="secondary" className="ml-2">
-              alpha
-            </Badge>
-          </div>
-          <nav className="hidden md:flex items-center gap-6 text-sm">
-            <a href="#come-funziona" className="hover:text-slate-600">
-              Come funziona
-            </a>
-            <a href="#roadmap" className="hover:text-slate-600">
-              Roadmap
-            </a>
-            <a href="#tokenomics" className="hover:text-slate-600">
-              Rendite
-            </a>
-            <a href="#faq" className="hover:text-slate-600">
-              FAQ
-            </a>
-          </nav>
-          <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm">
-              {BRAND.ctaSecondary}
-            </Button>
-            <Button size="sm" className="gap-2" variant="outline">
-              {BRAND.ctaPrimary}
-              <ArrowRight className="h-4 w-4" />
-            </Button>
+
+            {/* Navigation Links - Center (7 columns) */}
+            <nav className="col-span-7 hidden md:flex items-center justify-center gap-8">
+              {[
+                { href: "#come-funziona", label: "Come funziona" },
+                { href: "#roadmap", label: "Roadmap" },
+                { href: "#tokenomics", label: "Rendite" },
+                { href: "#faq", label: "FAQ" },
+              ].map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="relative text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors duration-200 group"
+                >
+                  {item.label}
+                  <span className="absolute inset-x-0 -bottom-1.5 h-0.5 bg-gradient-to-r from-amber-500 to-pink-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left"></span>
+                </a>
+              ))}
+            </nav>
+
+            {/* CTA Buttons - Right (3 columns) */}
+            <div className="col-span-3 flex items-center justify-end gap-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="font-medium hover:bg-slate-100"
+              >
+                {BRAND.ctaSecondary}
+              </Button>
+              <Button
+                size="sm"
+                className="bg-gradient-to-r from-amber-500 to-pink-500 text-white font-medium hover:opacity-90 transition-opacity duration-200 shadow-md gap-2"
+              >
+                {BRAND.ctaPrimary}
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -257,6 +292,9 @@ export default function App() {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
+                  <div className="mb-4">
+                    <ImageCarousel images={HOUSE_IMAGES} />
+                  </div>
                   <div className="flex items-center justify-between mb-2 text-sm">
                     <span>Avanzamento raccolta</span>
                     <span className="font-medium">{progress}%</span>
@@ -295,98 +333,195 @@ export default function App() {
       {/* TRUST / PILLARS */}
       <section
         id="come-funziona"
-        className="mx-auto max-w-full px-4 sm:px-6 lg:px-8 py-14"
+        className="mx-auto max-w-full px-4 sm:px-6 lg:px-8 py-20"
       >
-        <div className="text-center mb-10">
-          <Badge variant="secondary">Come funziona</Badge>
-          <h2 className="mt-3 text-3xl sm:text-4xl font-semibold tracking-tight">
-            Dal deposito alla rendita, in 4 step
-          </h2>
-          <p className="mt-2 text-slate-600">
-            Tutto tracciato on‑chain, con processi automatizzati e auditabili.
-          </p>
+        <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <Badge variant="secondary">Come funziona</Badge>
+            <h2 className="mt-3 text-3xl sm:text-4xl font-semibold tracking-tight">
+              Dal deposito alla rendita, in 4 step
+            </h2>
+            <p className="mt-2 text-slate-600">
+              Tutto tracciato on‑chain, con processi automatizzati e auditabili.
+            </p>
+          </motion.div>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <div className="relative max-w-5xl mx-auto">
           {HOW_IT_WORKS.map((s, i) => (
-            <motion.div key={i} {...fadeUp} className="">
-              <Card className="h-full border-slate-200">
-                <CardContent className="pt-6">
-                  <div className="h-11 w-11 rounded-2xl bg-slate-900 text-white grid place-items-center mb-4">
-                    {s.icon}
-                  </div>
-                  <h3 className="font-semibold text-lg mb-1">{s.title}</h3>
-                  <p className="text-sm text-slate-600">{s.desc}</p>
-                </CardContent>
-              </Card>
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50, y: 20 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              transition={{ duration: 0.8, delay: i * 0.2 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className={`flex ${
+                i % 2 === 0 ? "justify-end" : "justify-start"
+              } mb-6`}
+              style={{
+                marginTop: i > 0 ? "-2rem" : "0", // Sovrappone leggermente le card
+              }}
+            >
+              <div
+                className={`w-full md:w-[450px] relative ${
+                  i % 2 === 0 ? "mr-auto md:mr-8" : "ml-auto md:ml-8"
+                }`}
+              >
+                <Card className="h-full border-slate-200 transition-all duration-300 hover:shadow-lg hover:border-slate-300">
+                  <CardContent className="p-6 flex flex-col items-center text-center">
+                    <motion.div
+                      initial={{ scale: 0.8 }}
+                      whileInView={{ scale: 1 }}
+                      transition={{ delay: i * 0.2 + 0.4, duration: 0.5 }}
+                      className="h-14 w-14 rounded-2xl bg-gradient-to-br from-amber-500 to-pink-500 text-white grid place-items-center mb-4 shadow-lg"
+                    >
+                      {s.icon}
+                    </motion.div>
+                    <h3 className="font-semibold text-lg mb-2">{s.title}</h3>
+                    <p className="text-sm text-slate-600 leading-relaxed">
+                      {s.desc}
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* TOKENOMICS / REVENUE */}
-      <section id="tokenomics" className="bg-white border-y border-slate-200">
-        <div className="mx-auto max-w-full px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid lg:grid-cols-3 gap-10 items-start">
-            <div className="lg:col-span-1">
-              <Badge variant="outline">Rendite & ripartizione</Badge>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight">
-                Come fluiscono gli affitti
-              </h2>
-              <p className="mt-2 text-slate-600">
-                Le locazioni vengono incassate off‑chain (locatore → startup). A
-                cadenza definita, la quota netta viene inviata allo smart
-                contract che ripartisce verso gli indirizzi dei partecipanti.
-              </p>
-              <ul className="mt-4 space-y-3 text-sm">
-                <li className="flex gap-2">
-                  <CheckCircle2 className="h-4 w-4 mt-0.5" /> Quote
-                  proporzionali all’importo versato
-                </li>
-                <li className="flex gap-2">
-                  <CheckCircle2 className="h-4 w-4 mt-0.5" /> Fondo manutenzione
-                  e assicurazione
-                </li>
-                <li className="flex gap-2">
-                  <CheckCircle2 className="h-4 w-4 mt-0.5" /> Reportistica
-                  pubblica e verificabile
-                </li>
-              </ul>
-            </div>
-            <div className="lg:col-span-2">
-              <div className="grid sm:grid-cols-2 gap-5">
-                <Card>
+      <section
+        id="tokenomics"
+        className="bg-gradient-to-b from-white to-slate-50 border-y border-slate-200 overflow-hidden"
+      >
+        <div className="mx-auto max-w-full px-4 sm:px-6 lg:px-8 py-24">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <Badge variant="outline">Rendite & ripartizione</Badge>
+            <h2 className="mt-3 text-3xl md:text-4xl font-semibold tracking-tight">
+              Come fluiscono gli affitti
+            </h2>
+            <p className="mt-4 text-slate-600 max-w-2xl mx-auto">
+              Le locazioni vengono incassate off‑chain e distribuite
+              automaticamente attraverso smart contract ai partecipanti.
+            </p>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-12 gap-10 items-start">
+            {/* Left Column */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="lg:col-span-4 relative"
+            >
+              <div className="sticky top-24 space-y-8">
+                <div className="relative">
+                  <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-amber-500/20 to-pink-500/20 blur-xl" />
+                  <Card className="relative border-slate-200">
+                    <CardContent className="pt-6">
+                      <ul className="space-y-4">
+                        {[
+                          {
+                            icon: <ArrowRight className="h-5 w-5" />,
+                            title: "Quote proporzionali",
+                            desc: "Distribuzione basata sull'importo investito",
+                          },
+                          {
+                            icon: <ShieldCheck className="h-5 w-5" />,
+                            title: "Fondo manutenzione",
+                            desc: "Riserva per spese straordinarie",
+                          },
+                          {
+                            icon: <FileText className="h-5 w-5" />,
+                            title: "Reportistica pubblica",
+                            desc: "Dati verificabili on-chain",
+                          },
+                        ].map((item, i) => (
+                          <motion.li
+                            key={i}
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.5, delay: i * 0.1 }}
+                            className="flex gap-4"
+                          >
+                            <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-amber-500 to-pink-500 text-white grid place-items-center shrink-0">
+                              {item.icon}
+                            </div>
+                            <div>
+                              <div className="font-medium">{item.title}</div>
+                              <div className="text-sm text-slate-600">
+                                {item.desc}
+                              </div>
+                            </div>
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Right Column */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="lg:col-span-8"
+            >
+              <div className="grid sm:grid-cols-2 gap-6">
+                <Card className="border-slate-200 overflow-hidden">
                   <CardHeader>
-                    <CardTitle className="text-base">
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      <Coins className="h-5 w-5 text-amber-500" />
                       Esempio di ripartizione
                     </CardTitle>
                     <CardDescription>Immobiliare #001 (stima)</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="grid grid-cols-2 gap-3 text-sm">
-                      <div className="rounded-xl bg-slate-50 p-3 border border-slate-200">
-                        <div className="text-slate-500">Affitto mensile</div>
-                        <div className="font-semibold">€ 1.250</div>
-                      </div>
-                      <div className="rounded-xl bg-slate-50 p-3 border border-slate-200">
-                        <div className="text-slate-500">Spese & fondo</div>
-                        <div className="font-semibold">€ 250</div>
-                      </div>
-                      <div className="rounded-xl bg-slate-50 p-3 border border-slate-200">
-                        <div className="text-slate-500">
-                          Netto a distribuire
-                        </div>
-                        <div className="font-semibold">€ 1.000</div>
-                      </div>
-                      <div className="rounded-xl bg-slate-50 p-3 border border-slate-200">
-                        <div className="text-slate-500">Frequenza</div>
-                        <div className="font-semibold">Mensile</div>
-                      </div>
+                    <div className="space-y-4">
+                      {[
+                        { label: "Affitto mensile", value: "€ 1.250" },
+                        { label: "Spese & fondo", value: "€ 250" },
+                        { label: "Netto a distribuire", value: "€ 1.000" },
+                        { label: "Frequenza", value: "Mensile" },
+                      ].map((item, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.4, delay: i * 0.1 }}
+                          className="p-4 rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 shadow-sm"
+                        >
+                          <div className="text-sm text-slate-500">
+                            {item.label}
+                          </div>
+                          <div className="text-lg font-semibold bg-gradient-to-r from-amber-500 to-pink-500 bg-clip-text text-transparent">
+                            {item.value}
+                          </div>
+                        </motion.div>
+                      ))}
                     </div>
                   </CardContent>
                 </Card>
-                <Card>
+
+                <Card className="border-slate-200">
                   <CardHeader>
-                    <CardTitle className="text-base">
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      <ShieldCheck className="h-5 w-5 text-pink-500" />
                       Garanzie & governance
                     </CardTitle>
                     <CardDescription>
@@ -394,71 +529,35 @@ export default function App() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <ul className="space-y-3 text-sm">
-                      <li className="flex gap-2">
-                        <ShieldCheck className="h-4 w-4 mt-0.5" /> Multi‑sig per
-                        operazioni critiche
-                      </li>
-                      <li className="flex gap-2">
-                        <ShieldCheck className="h-4 w-4 mt-0.5" /> Oracoli per
-                        trigger di payout
-                      </li>
-                      <li className="flex gap-2">
-                        <ShieldCheck className="h-4 w-4 mt-0.5" /> Votazioni su
-                        interventi straordinari
-                      </li>
-                    </ul>
+                    <div className="space-y-4">
+                      {[
+                        "Multi‑sig per operazioni critiche",
+                        "Oracoli per trigger di payout",
+                        "Votazioni su interventi straordinari",
+                      ].map((item, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, y: 10 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.4, delay: i * 0.1 }}
+                          className="p-4 rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 shadow-sm flex items-center gap-3"
+                        >
+                          <div className="h-8 w-8 rounded-lg bg-pink-500/10 text-pink-500 grid place-items-center">
+                            <ShieldCheck className="h-4 w-4" />
+                          </div>
+                          <div className="text-sm font-medium">{item}</div>
+                        </motion.div>
+                      ))}
+                    </div>
                   </CardContent>
                 </Card>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ROADMAP */}
-      <section
-        id="roadmap"
-        className="mx-auto max-w-full px-4 sm:px-6 lg:px-8 py-16"
-      >
-        <div className="text-center mb-10">
-          <Badge variant="secondary">Roadmap</Badge>
-          <h2 className="mt-3 text-3xl sm:text-4xl font-semibold tracking-tight">
-            Il percorso verso il primo immobile
-          </h2>
-          <p className="mt-2 text-slate-600">
-            Step chiari, milestone misurabili, trasparenza sui rilasci.
-          </p>
-        </div>
-        <div className="grid lg:grid-cols-4 gap-5">
-          {ROADMAP.map((r, i) => (
-            <Card key={i} className="border-slate-200">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <Badge variant="outline">
-                    <Calendar className="h-3.5 w-3.5 mr-1" /> {r.q}
-                  </Badge>
-                  {i === 0 ? (
-                    <Badge>In corso</Badge>
-                  ) : (
-                    <Badge variant="secondary">Prossimo</Badge>
-                  )}
-                </div>
-                <CardTitle className="text-lg mt-2">{r.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2 text-sm">
-                  {r.items.map((it, j) => (
-                    <li key={j} className="flex gap-2">
-                      <ChevronRight className="h-4 w-4 mt-0.5" /> {it}
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
+      <RoadmapSection ROADMAP={ROADMAP} activeIndex={0} />
 
       {/* SOCIAL PROOF / CARDS */}
       <section className="bg-slate-50 border-y border-slate-200">
