@@ -41,10 +41,14 @@ export default function Hero() {
               {BRAND.tagline}
             </h1>
             <p className="mt-4 text-lg text-slate-600 max-w-xl">
-              Mettiamo insieme il capitale per acquistare case in affitto.
-              Quando la soglia è raggiunta, lo smart contract completa
-              l’acquisto e le rendite vengono distribuite automaticamente ai
-              partecipanti.
+              Vogliamo aprire l’investimento immobiliare a tutti, non solo a
+              pochi. Tokenizziamo le case così da poter acquistare piccole
+              quote, ricevere parte dei canoni d’affitto e partecipare alle
+              decisioni. Questo è più di un semplice progetto: è un movimento
+              verso un cambiamento radicale. Crediamo in un futuro in cui
+              l'empowerment finanziario non sia determinato dal vostro
+              background, ma dalla vostra ambizione. Unitevi a noi nella
+              costruzione di un mondo più equo e accessibile.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
