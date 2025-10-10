@@ -3,13 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, ChevronRight, Sparkles } from "lucide-react";
 
 // ⬇️ Import from your shadcn/ui setup
-import { Badge } from "../components/ui/badge";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-} from "../components/ui/card";
+import { Badge } from "../ui/badge";
+import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
 
 /**
  * RoadmapSection — versione corretta e tipata

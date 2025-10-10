@@ -1,3 +1,5 @@
+import type { Comp, Poi } from "../components/marketplace/PropertyMap.component";
+
 declare global {
     interface Window {
         ethereum?: any;
@@ -122,3 +124,53 @@ export const fadeUp = {
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.6 },
 };
+
+export const pois: Poi[] = [
+    { id: "p1", type: "metro", name: "Metro XX", lat: 44.5003, lng: 11.3462 },
+    { id: "p2", type: "grocery", name: "Supermercato Coop", lat: 44.4935, lng: 11.339 },
+    { id: "p3", type: "pharmacy", name: "Farmacia Centrale", lat: 44.4972, lng: 11.3368 },
+    { id: "p4", type: "gym", name: "Palestra Fit", lat: 44.4988, lng: 11.348 },
+    { id: "p5", type: "bank", name: "ATM Unicredit", lat: 44.495, lng: 11.3471 },
+];
+
+// Comparables mock
+export const comps: Comp[] = [
+    { id: "c1", lat: 44.498, lng: 11.338, address: "Via Rialto 5", rent: 1200, area: 90, euroPerSqm: 13.3, beds: 3, baths: 2, date: "2025-06", sourceUrl: "#" },
+    { id: "c2", lat: 44.494, lng: 11.345, address: "Via Indipendenza 12", rent: 1300, area: 95, euroPerSqm: 13.7, beds: 3, baths: 2, date: "2025-07", sourceUrl: "#" },
+    { id: "c3", lat: 44.497, lng: 11.349, address: "Via delle Lame 20", rent: 1150, area: 88, euroPerSqm: 13.1, beds: 3, baths: 2, date: "2025-05", sourceUrl: "#" },
+];
+
+// MOCK dettaglio immobile
+export const property = {
+    address: "Via delle Magnolie 18",
+    city: "Bologna, Italia",
+    year: 2016,
+    area: 96,
+    beds: 3,
+    baths: 2,
+    floor: "3° piano con ascensore",
+    condition: "Ottimo",
+    rentStatus: "Affittato (12 mesi rinnovabile)",
+    grossYield: 6.1,
+    netYield: 5.4,
+    monthlyRent: 1250,
+    condoFees: 120,
+    images: [
+        "/house-images/house1.png",
+        "/house-images/house2.png",
+        "/house-images/house3.png",
+        "/house-images/house4.png",
+        "/house-images/house5.png",
+        "/house-images/house6.png",
+        "/house-images/house7.png",
+    ],
+    // financials mock
+    purchasePrice: 220_000,
+    taxesNotary: 9_500,
+    refurbish: 12_000,
+    furnishing: 5_000,
+    originationFee: 3_300,
+    reserveFund: 5_000,
+};
+
+export const center: [number, number] = [44.4959, 11.343]; // mock Bologna

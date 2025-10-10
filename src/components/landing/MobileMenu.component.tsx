@@ -1,6 +1,6 @@
 import React from "react";
-import { BRAND } from "../types/types";
-import { Button } from "./ui/button";
+import { BRAND } from "../../types/types";
+import { Button } from "../ui/button";
 
 export function MobileMenuButton() {
   const [open, setOpen] = React.useState(false);

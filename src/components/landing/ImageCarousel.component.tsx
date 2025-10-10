@@ -13,7 +13,7 @@ export function ImageCarousel({
 
   const go = useCallback(
     (n: number) => {
-      setIndex((prev) => (n + images.length) % images.length);
+      setIndex((_) => (n + images.length) % images.length);
     },
     [images.length]
   );

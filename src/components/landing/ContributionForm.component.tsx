@@ -6,11 +6,11 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "./ui/card";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
-import { useMetaMask } from "../hooks/meta.hook";
-import type { Pool } from "../types/types";
+} from "../ui/card";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { useMetaMask } from "../../hooks/meta.hook";
+import type { Pool } from "../../types/types";
 
 // --- Form di contributo con invio ETH al contratto pool ---
 export function ContributionForm({ pool }: { pool: Pool }) {
