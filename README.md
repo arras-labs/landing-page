@@ -15,18 +15,16 @@ La landing page include un marketplace completo accessibile cliccando sul botton
 
 ### 1. Deploy dello Smart Contract
 
-Prima di avviare la landing page, devi avere il file .env sulla repo `contracts` correttamente compilato (vedi .env.example), poi avvia lo script:
+Prima di avviare la landing page, avvia lo script dalla repo repo `contracts`:
 
 ```bash
 cd ../contracts
 ./auto-setup.sh
 ```
 
-e inserisci la private key che trovi nel docker all'interno del .env sempre di `contracts`.
+Lo script `auto-setup.sh` ti fa selezionare tra Ganache e Polygon Amoi, seleziona il primo (tenere Docker sempre attivo), il deploy del contratto parte automaticamente. Copia l'address del contratto nel file .env di landing page.
 
-Lo script `auto-setup.sh` ti fa selezionare tra Ganache e Polygon Amoi, seleziona il primo (tenere Docker sempre attivo), il deploy del contratto parte automaticamente. Successivamente quando chiede se si vuole runnare anche il front end seleziona No. Copia l'address del contratto nel file .env di landing page.
-
-Inoltre configura la rete ganache su Metamask e crea almeno due address, uno dei quali è colui che deploya il contratto con degli immobili di placeholder su cui fare dei test acquistando token con l'altro address.
+Inoltre configura la rete ganache su Metamask e crea almeno due address (usando address #0 dal docker per l'owner degli immobili, e un address qualsiasi per chi acquista i token).
 
 ### 2. Configurazione del file .env
 
