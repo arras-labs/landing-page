@@ -62,6 +62,14 @@ export default function Header() {
               variant="outline"
               size="sm"
               className="font-medium hover:bg-slate-100"
+              asChild
+            >
+              <a href="/marketplace">Marketplace</a>
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              className="font-medium hover:bg-slate-100"
             >
               {BRAND.ctaSecondary}
             </Button>
