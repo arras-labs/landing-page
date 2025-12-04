@@ -131,7 +131,7 @@ function MarketplacePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-b from-white to-slate-50">
       <Header
         walletState={walletState}
         onConnect={connectWallet}
@@ -146,60 +146,60 @@ function MarketplacePage() {
             <main className="container mx-auto px-4 py-8">
               {!walletState.isConnected ? (
                 <div className="text-center py-20">
-                  <div className="bg-white rounded-lg shadow-xl p-12 max-w-md mx-auto">
-                    <h2 className="text-3xl font-bold text-gray-800 mb-4">
+                  <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-12 max-w-md mx-auto">
+                    <h2 className="text-3xl font-bold text-slate-900 mb-4">
                       Benvenuto su Real Estate DApp
                     </h2>
-                    <p className="text-gray-600 mb-8">
+                    <p className="text-slate-600 mb-8">
                       Connetti il tuo wallet per iniziare a comprare e vendere
                       proprieta immobiliari sulla blockchain.
                     </p>
                     <div className="space-y-3">
                       <button
                         onClick={connectWallet}
-                        className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-8 py-3 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
+                        className="w-full bg-gradient-to-r from-amber-500 to-pink-500 text-white px-8 py-3 rounded-lg hover:opacity-90 transition-all shadow-md"
                       >
                         Connetti Wallet
                       </button>
                       <a
                         href="/"
-                        className="block w-full bg-white border-2 border-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all"
+                        className="block w-full bg-white border border-slate-200 text-slate-700 px-8 py-3 rounded-lg hover:bg-slate-50 transition-all"
                       >
-                        Torna alla Landing Page
+                        ← Torna alla Landing Page
                       </a>
                     </div>
                   </div>
                 </div>
               ) : (
                 <>
-                  <div className="flex justify-between items-center mb-8">
-                    <div className="flex gap-4">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+                    <div className="flex flex-wrap gap-2">
                       <button
                         onClick={() => setActiveTab("all")}
-                        className={`px-6 py-2 rounded-lg font-semibold transition-all ${
+                        className={`px-4 py-2 rounded-full font-medium transition-all text-sm ${
                           activeTab === "all"
-                            ? "bg-blue-600 text-white shadow-lg"
-                            : "bg-white text-gray-700 hover:bg-gray-100"
+                            ? "bg-gradient-to-r from-amber-500 to-pink-500 text-white shadow-md"
+                            : "bg-white border border-slate-200 text-slate-700 hover:bg-slate-50"
                         }`}
                       >
                         Tutte le Pool ({properties.length})
                       </button>
                       <button
                         onClick={() => setActiveTab("my")}
-                        className={`px-6 py-2 rounded-lg font-semibold transition-all ${
+                        className={`px-4 py-2 rounded-full font-medium transition-all text-sm ${
                           activeTab === "my"
-                            ? "bg-blue-600 text-white shadow-lg"
-                            : "bg-white text-gray-700 hover:bg-gray-100"
+                            ? "bg-gradient-to-r from-amber-500 to-pink-500 text-white shadow-md"
+                            : "bg-white border border-slate-200 text-slate-700 hover:bg-slate-50"
                         }`}
                       >
                         Le Mie Proprietà ({myProperties.length})
                       </button>
                       <button
                         onClick={() => setActiveTab("investments")}
-                        className={`px-6 py-2 rounded-lg font-semibold transition-all ${
+                        className={`px-4 py-2 rounded-full font-medium transition-all text-sm ${
                           activeTab === "investments"
-                            ? "bg-blue-600 text-white shadow-lg"
-                            : "bg-white text-gray-700 hover:bg-gray-100"
+                            ? "bg-gradient-to-r from-amber-500 to-pink-500 text-white shadow-md"
+                            : "bg-white border border-slate-200 text-slate-700 hover:bg-slate-50"
                         }`}
                       >
                         I Miei Investimenti ({myInvestments.length})
@@ -207,7 +207,7 @@ function MarketplacePage() {
                     </div>
                     <button
                       onClick={() => setShowListForm(true)}
-                      className="bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-2 rounded-lg hover:from-green-600 hover:to-emerald-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
+                      className="bg-black text-white px-6 py-2 rounded-lg hover:bg-slate-800 transition-all shadow-md font-medium"
                     >
                       + Crea Nuova Pool
                     </button>
@@ -215,13 +215,13 @@ function MarketplacePage() {
 
                   {loading ? (
                     <div className="text-center py-20">
-                      <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto"></div>
-                      <p className="text-gray-600 mt-4">Caricamento...</p>
+                      <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-amber-500 mx-auto"></div>
+                      <p className="text-slate-600 mt-4">Caricamento...</p>
                     </div>
                   ) : displayProperties.length === 0 ? (
                     <div className="text-center py-20">
-                      <div className="bg-white rounded-lg shadow-xl p-12 max-w-md mx-auto">
-                        <p className="text-gray-600 text-lg">
+                      <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-12 max-w-md mx-auto">
+                        <p className="text-slate-600 text-lg">
                           {activeTab === "all"
                             ? "Nessuna pool disponibile"
                             : activeTab === "my"

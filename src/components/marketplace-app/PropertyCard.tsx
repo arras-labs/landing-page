@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import type { Property } from "../types";
+import type { Property } from "../../types-marketplace";
 import { ImageCarousel } from "./ImageCarousel";
 import { getPropertyImages } from "../../services-marketplace/propertyImages";
 
@@ -38,37 +38,37 @@ export const PropertyCard = ({
   const totalValueUSD = Number(property.totalValueUSD);
 
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 animate-fade-in">
+    <div className="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-lg hover:border-slate-300 transition-all duration-300">
       <div className="relative h-64 overflow-hidden">
         <ImageCarousel images={images} alt={property.name} />
         {property.isActive && (
-          <span className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold z-10">
+          <span className="absolute top-4 right-4 bg-emerald-500 text-white px-3 py-1 rounded-full text-xs font-semibold z-10 shadow-md">
             Pool Attiva
           </span>
         )}
         {!property.isActive && (
-          <span className="absolute top-4 right-4 bg-gray-500 text-white px-3 py-1 rounded-full text-sm font-semibold z-10">
+          <span className="absolute top-4 right-4 bg-slate-500 text-white px-3 py-1 rounded-full text-xs font-semibold z-10 shadow-md">
             Pool Chiusa
           </span>
         )}
         {isOwner && (
-          <span className="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-semibold z-10">
+          <span className="absolute top-4 left-4 bg-gradient-to-r from-amber-500 to-pink-500 text-white px-3 py-1 rounded-full text-xs font-semibold z-10 shadow-md">
             Tua Proprietà
           </span>
         )}
         {percentageComplete === 100 && (
-          <span className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-yellow-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg z-10">
+          <span className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-amber-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg z-10">
             🎉 Pool Completata!
           </span>
         )}
       </div>
 
       <div className="p-6">
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">
+        <h3 className="text-xl font-bold text-slate-900 mb-2">
           {property.name}
         </h3>
 
-        <div className="flex items-center text-gray-600 mb-3">
+        <div className="flex items-center text-slate-600 mb-3">
           <svg
             className="w-5 h-5 mr-2"
             fill="none"
@@ -97,29 +97,29 @@ export const PropertyCard = ({
 
         <div className="mb-4">
           <div className="flex justify-between text-sm mb-2">
-            <span className="text-gray-600">Progresso Pool</span>
-            <span className="font-semibold text-blue-600">
+            <span className="text-slate-600">Progresso Pool</span>
+            <span className="font-semibold text-slate-900">
               {percentageComplete}%
             </span>
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+          <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
             <div
               className={`h-full transition-all duration-500 ${
                 percentageComplete === 100
-                  ? "bg-green-500"
-                  : "bg-gradient-to-r from-blue-500 to-blue-600"
+                  ? "bg-gradient-to-r from-emerald-500 to-emerald-600"
+                  : "bg-gradient-to-r from-amber-500 to-pink-500"
               }`}
               style={{ width: `${percentageComplete}%` }}
             ></div>
           </div>
-          <div className="flex justify-between text-xs text-gray-500 mt-1">
+          <div className="flex justify-between text-xs text-slate-500 mt-1">
             <span>{Number(property.tokensSold)} venduti</span>
             <span>{tokensAvailable} disponibili</span>
           </div>
         </div>
 
-        <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-200">
-          <div className="flex items-center text-gray-700">
+        <div className="flex items-center justify-between mb-4 pb-4 border-b border-slate-200">
+          <div className="flex items-center text-slate-700">
             <svg
               className="w-5 h-5 mr-2"
               fill="none"
@@ -136,23 +136,23 @@ export const PropertyCard = ({
             <span className="font-semibold">{property.area.toString()} m²</span>
           </div>
           <div className="text-right">
-            <p className="text-xs text-gray-500">Valore Raccolto</p>
-            <p className="text-lg font-bold text-green-600">
+            <p className="text-xs text-slate-500">Valore Raccolto</p>
+            <p className="text-lg font-bold text-emerald-600">
               ${currentValueUSD.toLocaleString()}
             </p>
           </div>
         </div>
 
-        <div className="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-100">
+        <div className="mb-4 p-3 bg-slate-50 rounded-lg border border-slate-200">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-sm text-gray-600">Valore Totale:</span>
-            <span className="text-xl font-bold text-gray-900">
+            <span className="text-sm text-slate-600">Valore Totale:</span>
+            <span className="text-xl font-bold text-slate-900">
               ${totalValueUSD.toLocaleString()}
             </span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-600">Token totali:</span>
-            <span className="font-semibold text-gray-700">
+            <span className="text-sm text-slate-600">Token totali:</span>
+            <span className="font-semibold text-slate-700">
               {Number(property.totalTokens)} × ${tokenPriceUSD}
             </span>
           </div>
@@ -163,7 +163,7 @@ export const PropertyCard = ({
           {/* Bottone Dettagli - sempre visibile */}
           <button
             onClick={() => navigate(`/marketplace/property/${property.id}`)}
-            className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
+            className="w-full bg-black hover:bg-slate-800 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200"
           >
             📊 Visualizza Dettagli
           </button>
@@ -174,7 +174,7 @@ export const PropertyCard = ({
             onBuyTokens && (
               <button
                 onClick={() => onBuyTokens(property)}
-                className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-3 px-4 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
+                className="w-full bg-gradient-to-r from-amber-500 to-pink-500 hover:opacity-90 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 shadow-md"
               >
                 💰 Acquista Token
               </button>

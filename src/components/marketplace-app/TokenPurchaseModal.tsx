@@ -110,7 +110,7 @@ export const TokenPurchaseModal = ({
                 type="button"
                 onClick={onCancel}
                 disabled={loading}
-                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg transition-colors duration-200 disabled:opacity-50"
+                className="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold py-3 px-4 rounded-lg transition-colors duration-200 disabled:opacity-50"
               >
                 Annulla
               </button>
@@ -119,9 +119,9 @@ export const TokenPurchaseModal = ({
                 disabled={
                   loading || tokenAmount < 1 || tokenAmount > availableTokens
                 }
-                className="flex-1 bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-200 disabled:opacity-50"
+                className="flex-1 bg-gradient-to-r from-amber-500 to-pink-500 hover:opacity-90 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 disabled:opacity-50 shadow-md"
               >
-                {loading ? "Acquisto..." : "Conferma Acquisto"}
+                {loading ? "Acquisto..." : "Conferma"}
               </button>
             </div>
           </form>
