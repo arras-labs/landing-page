@@ -1,73 +1,53 @@
-# React + TypeScript + Vite
+# CasaChain Landing Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Landing page per CasaChain con marketplace integrato per la tokenizzazione immobiliare.
 
-Currently, two official plugins are available:
+## Accesso al Marketplace
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+La landing page include un marketplace completo accessibile cliccando sul bottone **"Marketplace"** nella barra di navigazione in alto. Il marketplace permette di:
 
-## React Compiler
+- Visualizzare tutti i pool immobiliari disponibili
+- Investire in proprietà tokenizzate
+- Creare nuovi pool immobiliari
+- Gestire i propri investimenti
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+## Setup Iniziale
 
-## Expanding the ESLint configuration
+### 1. Deploy dello Smart Contract
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Prima di avviare la landing page, devi avere il file .env sulla repo `contracts` correttamente compilato (vedi .env.example), poi avvia lo script:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cd ../contracts
+./auto-setup.sh
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+e inserisci la private key che trovi nel docker all'interno del .env sempre di `contracts`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Lo script `auto-setup.sh` ti fa selezionare tra Ganache e Polygon Amoi, seleziona il primo (tenere Docker sempre attivo), il deploy del contratto parte automaticamente. Successivamente quando chiede se si vuole runnare anche il front end seleziona No. Copia l'address del contratto nel file .env di landing page.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Inoltre configura la rete ganache su Metamask e crea almeno due address, uno dei quali è colui che deploya il contratto con degli immobili di placeholder su cui fare dei test acquistando token con l'altro address.
+
+### 2. Configurazione del file .env
+
+Copia il file `.env.example` in `.env` e modifica le seguenti variabili:
+
+```bash
+cp .env.example .env
 ```
+
+Variabili da configurare:
+
+- **VITE_CONTRACT_ADDRESS**: Inserisci l'indirizzo del contratto ottenuto dal deploy (es. `0x06F4a48b62a09426B2cfeA745771299199A1c57D`)
+- **VITE_CHAIN_ID**: `1337` per Ganache locale
+- **VITE_NETWORK_NAME**: `Ganache Local`
+- **VITE_DROPBOX_ACCESS_TOKEN**: Token di accesso Dropbox per la gestione dei documenti (opzionale per il primo test)
+
+### 3. Installazione e Avvio
+
+```bash
+npm install
+npm run dev
+```
+
+L'applicazione sarà disponibile su `http://localhost:5173`
