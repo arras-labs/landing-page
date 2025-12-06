@@ -48,7 +48,7 @@ export const TokenPurchaseModal = ({
               {property.name}
             </h3>
             <div className="space-y-1 text-sm text-gray-600">
-              <p>📍 {property.location}</p>
+              <p>📍 {property.address}</p>
               <p>
                 💰 Prezzo per token: ${tokenPriceUSD} (≈ {tokenPriceETH} ETH)
               </p>

@@ -81,7 +81,7 @@ function MarketplacePage() {
   const handleListProperty = async (data: {
     name: string;
     description: string;
-    location: string;
+    address: string;
     totalValueUSD: string;
     area: string;
     imageUrl: string;
@@ -90,7 +90,7 @@ function MarketplacePage() {
     const result = await listProperty(
       data.name,
       data.description,
-      data.location,
+      data.address,
       data.totalValueUSD,
       data.area,
       data.imageUrl

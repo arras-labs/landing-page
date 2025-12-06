@@ -1,7 +1,6 @@
 export const CONTRACT_ADDRESS = import.meta.env.VITE_CONTRACT_ADDRESS || "";
 export const CHAIN_ID = parseInt(import.meta.env.VITE_CHAIN_ID || "1337");
-export const NETWORK_NAME =
-  import.meta.env.VITE_NETWORK_NAME || "Ganache Local";
+export const NETWORK_NAME = import.meta.env.VITE_NETWORK_NAME || "Ganache Local";
 
 export const CONTRACT_ABI = [
   {
@@ -597,7 +596,7 @@ export const CONTRACT_ABI = [
           },
           {
             "internalType": "string",
-            "name": "location",
+            "name": "propertyAddress",
             "type": "string"
           },
           {
@@ -726,7 +725,7 @@ export const CONTRACT_ABI = [
           },
           {
             "internalType": "string",
-            "name": "location",
+            "name": "propertyAddress",
             "type": "string"
           },
           {
@@ -817,7 +816,7 @@ export const CONTRACT_ABI = [
           },
           {
             "internalType": "string",
-            "name": "location",
+            "name": "propertyAddress",
             "type": "string"
           },
           {
@@ -957,7 +956,7 @@ export const CONTRACT_ABI = [
           },
           {
             "internalType": "string",
-            "name": "location",
+            "name": "propertyAddress",
             "type": "string"
           },
           {
@@ -1145,7 +1144,7 @@ export const CONTRACT_ABI = [
       },
       {
         "internalType": "string",
-        "name": "_location",
+        "name": "_propertyAddress",
         "type": "string"
       },
       {
@@ -1285,7 +1284,7 @@ export const CONTRACT_ABI = [
       },
       {
         "internalType": "string",
-        "name": "location",
+        "name": "propertyAddress",
         "type": "string"
       },
       {

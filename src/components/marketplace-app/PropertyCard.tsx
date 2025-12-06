@@ -88,7 +88,7 @@ export const PropertyCard = ({
               d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
             />
           </svg>
-          {property.location}
+          {property.address}
         </div>
 
         <p className="text-gray-600 mb-4 line-clamp-2">

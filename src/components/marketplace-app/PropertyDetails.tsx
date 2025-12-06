@@ -9,7 +9,10 @@ import { YieldSection } from "./YieldSection";
 import { DocumentsSection } from "./DocumentsSection";
 import { TokenPurchaseModal } from "./TokenPurchaseModal";
 import { ImageCarousel } from "./ImageCarousel";
+import { PropertyMap } from "./PropertyMap";
 import { getPropertyImages } from "../../services-marketplace/propertyImages";
+import { geocodeAddressWithCache } from "../../utils-marketplace/geocoding";
+import "leaflet/dist/leaflet.css";
 
 interface PropertyDetailsProps {
   walletState: { account: string | null; isConnected: boolean };
@@ -52,12 +55,27 @@ export const PropertyDetails = ({
     "overview" | "yield" | "documents"
   >("overview");
   const [showTokenModal, setShowTokenModal] = useState(false);
+  const [mapCoordinates, setMapCoordinates] = useState<{
+    lat: number;
+    lng: number;
+  } | null>(null);
 
   useEffect(() => {
     if (id) {
       loadPropertyData();
     }
   }, [id, walletState.account]);
+
+  // Geocoding dell'indirizzo quando la property viene caricata
+  useEffect(() => {
+    if (property?.address) {
+      geocodeAddressWithCache(property.address).then((result) => {
+        if (result) {
+          setMapCoordinates({ lat: result.lat, lng: result.lng });
+        }
+      });
+    }
+  }, [property?.address]);
 
   const loadPropertyData = async () => {
     if (!id) return;
@@ -192,7 +210,7 @@ export const PropertyDetails = ({
                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                       />
                     </svg>
-                    {property.location}
+                    {property.address}
                   </span>
                   <span>•</span>
                   <span className="flex items-center gap-2">
@@ -341,9 +359,9 @@ export const PropertyDetails = ({
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-slate-600">Posizione:</span>
+                        <span className="text-slate-600">Indirizzo:</span>
                         <span className="font-medium text-slate-900">
-                          {property.location}
+                          {property.address}
                         </span>
                       </div>
                       <div className="flex justify-between">
@@ -391,6 +409,21 @@ export const PropertyDetails = ({
                     </div>
                   </div>
                 </div>
+
+                {/* Mappa con posizione immobile */}
+                {mapCoordinates && property.address && (
+                  <div>
+                    <h4 className="font-semibold text-slate-900 mb-3">
+                      📍 Posizione
+                    </h4>
+                    <PropertyMap
+                      lat={mapCoordinates.lat}
+                      lng={mapCoordinates.lng}
+                      title={property.name}
+                      address={property.address}
+                    />
+                  </div>
+                )}
 
                 {poolInfo.investors.length > 0 && (
                   <div>

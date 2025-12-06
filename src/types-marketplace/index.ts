@@ -2,7 +2,7 @@ export interface Property {
   id: bigint;
   name: string;
   description: string;
-  location: string;
+  address: string; // Indirizzo completo per geocoding (es: "Via Monte Napoleone 8, 20121 Milano, Italy")
   totalValueUSD: bigint; // Valore totale in USD
   area: bigint;
   owner: string;
