@@ -139,39 +139,43 @@ export const DocumentsSection = ({
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Header con pulsante upload */}
-      <div className="flex justify-between items-center">
-        <div>
-          <h3 className="text-2xl font-bold text-gray-900">
-            📁 Documenti Proprietà
-          </h3>
-          <p className="text-gray-600 mt-1">
-            Tutti i documenti relativi a questa proprietà sono archiviati in
-            modo sicuro su IPFS
-          </p>
-        </div>
-        {isOwner && (
-          <button
-            onClick={() => setShowUploadForm(!showUploadForm)}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 flex items-center gap-2"
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+      <div className="bg-gradient-to-r from-slate-50 to-white rounded-xl p-6 border border-slate-200 shadow-sm">
+        <div className="flex justify-between items-center">
+          <div>
+            <h3 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
+              <svg className="w-8 h-8 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Documenti Proprietà
+            </h3>
+            <p className="text-slate-600 mt-2">
+              Tutti i documenti relativi a questa proprietà sono archiviati in modo sicuro su IPFS e Dropbox
+            </p>
+          </div>
+          {isOwner && (
+            <button
+              onClick={() => setShowUploadForm(!showUploadForm)}
+              className="bg-gradient-to-r from-amber-500 to-pink-500 hover:from-amber-600 hover:to-pink-600 text-white px-6 py-3 rounded-lg transition-all duration-200 flex items-center gap-2 shadow-lg font-semibold"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 4v16m8-8H4"
-              />
-            </svg>
-            Carica Documento
-          </button>
-        )}
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 4v16m8-8H4"
+                />
+              </svg>
+              Carica Documento
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Form upload documento */}
@@ -428,33 +432,35 @@ export const DocumentsSection = ({
           {/* Documenti IPFS */}
           {documents.length > 0 && (
             <div>
-              <h4 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="text-2xl">🌐</span>
+              <h4 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <svg className="w-6 h-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
                 Documenti IPFS ({documents.length})
               </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {documents.map((doc) => (
                   <div
                     key={doc.id.toString()}
-                    className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-6 border border-gray-200"
+                    className="bg-gradient-to-br from-emerald-50 to-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border border-emerald-200"
                   >
-                    <div className="flex items-start justify-between mb-3">
-                      <span className="text-4xl">
+                    <div className="flex items-start justify-between mb-4">
+                      <span className="text-5xl">
                         {getDocumentIcon(doc.documentType)}
                       </span>
-                      <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                      <span className="text-xs font-semibold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full">
                         {doc.documentType}
                       </span>
                     </div>
 
-                    <h4 className="font-bold text-gray-900 mb-2 line-clamp-2">
+                    <h4 className="font-bold text-slate-900 mb-3 line-clamp-2 text-lg">
                       {doc.name}
                     </h4>
 
-                    <div className="space-y-2 text-xs text-gray-600 mb-4">
+                    <div className="space-y-2 text-sm text-slate-600 mb-4 bg-white rounded-lg p-3">
                       <div className="flex items-center gap-2">
                         <svg
-                          className="w-4 h-4"
+                          className="w-4 h-4 text-emerald-500"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -466,11 +472,11 @@ export const DocumentsSection = ({
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                           />
                         </svg>
-                        {formatDate(doc.uploadDate)}
+                        <span className="font-medium">{formatDate(doc.uploadDate)}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <svg
-                          className="w-4 h-4"
+                          className="w-4 h-4 text-emerald-500"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -482,8 +488,10 @@ export const DocumentsSection = ({
                             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                           />
                         </svg>
-                        {doc.uploadedBy.slice(0, 6)}...
-                        {doc.uploadedBy.slice(-4)}
+                        <span className="font-mono text-xs">
+                          {doc.uploadedBy.slice(0, 6)}...
+                          {doc.uploadedBy.slice(-4)}
+                        </span>
                       </div>
                     </div>
 
@@ -491,10 +499,10 @@ export const DocumentsSection = ({
                       href={getIpfsUrl(doc.ipfsHash)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-2 rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
+                      className="block w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white text-center py-3 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 shadow-md font-semibold"
                     >
                       <svg
-                        className="w-4 h-4"
+                        className="w-5 h-5"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -523,15 +531,17 @@ export const DocumentsSection = ({
           {/* Documenti Dropbox */}
           {dropboxDocuments.length > 0 && (
             <div>
-              <h4 className="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
-                <span className="text-2xl">📦</span>
+              <h4 className="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                </svg>
                 Documenti Dropbox ({dropboxDocuments.length})
               </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {dropboxDocuments.map((doc, index) => (
                   <div
                     key={index}
-                    className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 p-4 border border-gray-200"
+                    className="bg-gradient-to-br from-blue-50 to-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-5 border border-blue-200"
                   >
                     {/* Thumbnail o icona */}
                     <div className="mb-3 h-32 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
@@ -603,11 +613,11 @@ export const DocumentsSection = ({
       )}
 
       {/* Info IPFS e Dropbox */}
-      <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded-lg">
+      <div className="bg-gradient-to-r from-blue-50 to-emerald-50 border-l-4 border-blue-500 p-6 rounded-xl shadow-sm">
         <div className="flex">
           <div className="flex-shrink-0">
             <svg
-              className="h-5 w-5 text-blue-400"
+              className="h-6 w-6 text-blue-500"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
@@ -620,12 +630,20 @@ export const DocumentsSection = ({
             </svg>
           </div>
           <div className="ml-3">
-            <p className="text-sm text-blue-700">
-              <strong>🌐 IPFS:</strong> Documenti decentralizzati, immutabili e
-              permanenti.
-              <br />
-              <strong>📦 Dropbox:</strong> Facile aggiornamento e gestione,
-              visibili a tutti gli investitori.
+            <p className="text-sm text-slate-700 leading-relaxed">
+              <strong className="text-emerald-600 flex items-center gap-1 mb-1">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                IPFS:
+              </strong> Documenti decentralizzati, immutabili e permanenti archiviati sulla rete IPFS.
+              <br /><br />
+              <strong className="text-blue-600 flex items-center gap-1 mb-1">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                </svg>
+                Dropbox:
+              </strong> Facile aggiornamento e gestione, visibili a tutti gli investitori della pool.
             </p>
           </div>
         </div>

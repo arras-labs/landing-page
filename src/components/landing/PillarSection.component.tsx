@@ -110,7 +110,7 @@ export default function PillarSection() {
             strokeLinecap="round"
             initial={{ pathLength: 0, opacity: 0 }}
             whileInView={{ pathLength: 1, opacity: 0.6 }}
-            transition={{ duration: 2.5, ease: "easeInOut" }}
+            transition={{ duration: 4.5, ease: "easeInOut", delay: 0.1 }}
             viewport={{ once: true }}
           />
         </svg>
